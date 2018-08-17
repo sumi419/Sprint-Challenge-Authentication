@@ -1,4 +1,7 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const db = require('./database/dbConfig');
 const cors = require('cors');
 
 const configureRoutes = require('./config/routes');
@@ -16,5 +19,5 @@ server.use(cors());
 configureRoutes(server);
 
 module.exports = {
-  server,
+  server
 };
