@@ -20,14 +20,18 @@ function register(req, res) {
   db('users')
     .insert(user)
     .then((ids) => {
+      // insert user gives back an id
       db('users')
         .where({ id: ids[0] })
+        // check the id of the new user you created
         .first()
         .then((user) => {
           db('users').then((user) => {
             const token = generateToken(user);
             res.status(201).json(token);
           });
+          // generating a token for the new user
+          // stays active for an hour set in options
         })
         .catch((error) => {
           res.status(500).json({ error });
